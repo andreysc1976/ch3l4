@@ -23,8 +23,8 @@ class MultiPresenter: MvpPresenter<MultiView>() {
             .subscribeOn(Schedulers.computation())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
-                {
-                    viewState.showResult(it)
+                {value->
+                    viewState.showResult(value)
                 }
             )
     }
