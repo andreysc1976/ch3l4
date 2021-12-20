@@ -20,7 +20,7 @@ class MultiPresenter: MvpPresenter<MultiView>() {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
             {
-                viewState::showResult
+                viewState.showResult(it)
             }
         )
         pSubject.onNext(value)
