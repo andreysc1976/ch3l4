@@ -11,18 +11,26 @@ class MultiPresenter: MvpPresenter<MultiView>() {
 
     val pSubject = BehaviorSubject.createDefault(0)
 
-    fun multipleValue(value:Int)
-    {
+    override fun onFirstViewAttach() {
+        super.onFirstViewAttach()
+        createSubject()
+    }
+
+    private fun createSubject() {
         pSubject.map{
             it*it
         }
             .subscribeOn(Schedulers.computation())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
-            {
-                viewState.showResult(it)
-            }
-        )
+                {
+                    viewState.showResult(it)
+                }
+            )
+    }
+
+    fun multipleValue(value:Int)
+    {
         pSubject.onNext(value)
     }
 }
